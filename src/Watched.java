@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Watched extends Movie{
+public class Watched extends Movie implements ReadFileByLineExample{
 
 ArrayList<Movie> watchedlist =new ArrayList<Movie>();
 

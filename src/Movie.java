@@ -1,12 +1,13 @@
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class Movie {
+public class Movie implements ReadFileByLineExample{
     ArrayList<Movie> MoviesList = new ArrayList<Movie>();
     public int MovieId;
     public String MovieTitle;
-    public String MovieDate;
+    public Date MovieDate;
     public int MovieTime;
     ArrayList<cast> MovieCast = new ArrayList<cast>();   // Cast class to be done later
     ArrayList<Genre> MovieGenre = new ArrayList<Genre>(); // Genre class to be done later
@@ -23,7 +24,7 @@ public class Movie {
 
     public Image MoviePoster;
 
-    public Movie(int movieId, String movieTitle, String movieDate, int movieTime, String movieLanguage, int IMDB_Score, String movieCountry, int movieBudget, int movieRevenue, Image moviePoster,double UserRating) {
+    public Movie(int movieId, String movieTitle, Date movieDate, int movieTime, String movieLanguage, int IMDB_Score, String movieCountry, int movieBudget, int movieRevenue, Image moviePoster, double UserRating) {
         MovieId = movieId;
         MovieTitle = movieTitle;
         MovieDate = movieDate;

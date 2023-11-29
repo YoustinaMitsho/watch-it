@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Favourite extends Movie {
+public class Favourite extends Movie implements ReadFileByLineExample {
 
     ArrayList<Movie>FavouriteList=new ArrayList<Movie>();
     public Favourite(int movieId, String movieTitle, String movieDate, int movieTime, String movieLanguage, int IMDB_Score, String movieCountry, int movieBudget, int movieRevenue, Image moviePoster, double UserRating) {

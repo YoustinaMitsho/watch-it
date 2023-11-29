@@ -1,7 +1,7 @@
 
 import java.time.LocalDate;
 
-public class Subscription {
+public class Subscription implements ReadFileByLineExample{
     protected int UserId;
     private int PlanPrice;
     protected LocalDate StartDate;

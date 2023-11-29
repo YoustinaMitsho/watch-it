@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class director extends movie_person {
+public class director extends movie_person implements ReadFileByLineExample{
 
     ArrayList<director> director_list = new ArrayList<director>();
 
