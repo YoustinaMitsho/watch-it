@@ -12,9 +12,7 @@ public class Admin extends personx {
 
     private void add_movie(String addmovie, String categories) {
         ///arrayoflist of movies 3nd youstina
-
         movies.add(addmovie);
-
         moviescategory.add(addmovie);
         //add director and cast
         System.out.println("movie is added successfully!!");
@@ -59,13 +57,7 @@ public class Admin extends personx {
         }
     }
 
-    public void AddCast(cast c, String MovieName) {
-        for (Movie MovieDAta : moviesList) {
-            if (MovieName.equals(MovieDAta.getMovieTitle())) {
-                MovieDAta.AddCast(c);
-            }
-        }
-    }
+
 
 
 }

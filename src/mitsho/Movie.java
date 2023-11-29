@@ -16,13 +16,14 @@ public class Movie {
     ArrayList<director> MovieDirector = new ArrayList<director>();  // Director class to be done later
     public String MovieLanguage; // Is it a class like director?
     public int IMDB_Score;
+    public double UserRating;
     public String MovieCountry;
     public int MovieBudget;
     public int MovieRevenue;
     public static boolean is_watched;
     public Image MoviePoster;
 
-    public Movie(int movieId, String movieTitle, String movieDate, int movieTime, String movieLanguage, int IMDB_Score, String movieCountry, int movieBudget, int movieRevenue, Image moviePoster) {
+    public Movie(int movieId, String movieTitle, String movieDate, int movieTime, String movieLanguage, int IMDB_Score, String movieCountry, int movieBudget, int movieRevenue, Image moviePoster,double UserRating) {
         MovieId = movieId;
         MovieTitle = movieTitle;
         MovieDate = movieDate;
@@ -33,6 +34,7 @@ public class Movie {
         MovieBudget = movieBudget;
         MovieRevenue = movieRevenue;
         MoviePoster = moviePoster;
+        this.UserRating=UserRating;
     }
 
     public String getMovieTitle() {
@@ -73,6 +75,10 @@ public class Movie {
     // show movie cast w director
     public void AddCast(cast c) {
         MovieCast.add(c);
+    }
+
+    public void AddDirector(director d) {
+        MovieDirector.add(d);
     }
     ArrayList<cast> SearchCastByName(String name) {
         ArrayList<cast> result = new ArrayList<cast>();
