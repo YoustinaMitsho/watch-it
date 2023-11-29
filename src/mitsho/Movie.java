@@ -5,8 +5,7 @@ import person_based_movies.*;
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 import java.util.List;
 
 public class Movie {
@@ -19,7 +18,7 @@ public class Movie {
     ArrayList<Genre> MovieGenre = new ArrayList<Genre>(); // Genre class to be done later
     ArrayList<director> MovieDirector = new ArrayList<director>();  // Director class to be done later
     public String MovieLanguage; // Is it a class like director?
-    public int IMDB_Score;
+    public Double IMDB_Score;
     public double UserRating;
     public String MovieCountry;
     public int MovieBudget;
@@ -29,7 +28,7 @@ public class Movie {
     public boolean is_WatchLater;
     public Image MoviePoster;
     public String discription;
-    public Movie(int movieId, String movieTitle, Date movieDate, int movieTime, String movieLanguage, int IMDB_Score, String movieCountry, int movieBudget, int movieRevenue, Image moviePoster,double UserRating,String Discription) {
+    public Movie(int movieId, String movieTitle, Date movieDate, int movieTime, String movieLanguage, Double IMDB_Score, String movieCountry, int movieBudget, int movieRevenue, Image moviePoster,double UserRating,String Discription) {
         MovieId = movieId;
         MovieTitle = movieTitle;
         MovieDate = movieDate;
@@ -59,8 +58,12 @@ public class Movie {
         return MovieTitle;
     }
 
+    public Double getIMDB_Score() {
+        return IMDB_Score;
+    }
+
     //public boolean isIs_watched() {
-        //return is_watched;
+    //return is_watched;
     //}
 
     /*public ArrayList<Movie> MovieSearch(String MovieName) {
@@ -129,9 +132,9 @@ public class Movie {
         return UpCommingMovie;
     }
 
-    /*public List<Movie> TopMovies(){
-        Movie[] topmovies = TopMovies().toArray(new Movie[10]);
-        // probably will use comprator interface
-        // to be studied then implemented
-    }*/
+    public List<Movie> TopMovies(){
+        Collections.sort(MoviesList, Comparator.comparingDouble(Movie::getIMDB_Score).reversed());
+        List<Movie> top10Movies = MoviesList.subList(0, Math.min(MoviesList.size(), 10));
+        return top10Movies;
+    }
 }
