@@ -1,11 +1,15 @@
 package nureen;
 
+import mitsho.Basic;
 import mitsho.Movie;
+import mitsho.Subscription;
 import person_based_movies.cast;
 
 import java.util.*;
 
 public class Admin extends personx {
+    Subscription sub = new Subscription();
+
     ArrayList<String> movies = new ArrayList<String>();
     ArrayList<Movie> moviesList = new ArrayList<Movie>();
     ArrayList<String> moviescategory = new ArrayList<String>();///arraylist of categories 3nd youstine
@@ -15,6 +19,7 @@ public class Admin extends personx {
         movies.add(addmovie);
         moviescategory.add(addmovie);
         //add director and cast
+
         System.out.println("movie is added successfully!!");
     }
 
@@ -35,29 +40,33 @@ public class Admin extends personx {
     }
 
     public void displayplannumbers() {
-        if (basic_counter > standard_counter) {
-            if (basic_counter > premium_counter && premium_counter > standard_counter) {
-                System.out.println("basic    " + basic_counter + " \n" + "  premium     " + premium_counter + "/n" + "standard     " + standard_counter);
+        if (Subscription.PlanACounter > Subscription.PlanBCounter) {
+            if (Subscription.PlanACounter > Subscription.PlanCCounter && Subscription.PlanCCounter > Subscription.PlanBCounter) {
+                System.out.println("basic    " + Subscription.PlanACounter + " \n" + "  premium     " + Subscription.PlanCCounter + "/n" + "standard     " + Subscription.PlanBCounter);
 
-            } else if (basic_counter > premium_counter && premium_counter < standard_counter) {
-                System.out.println("basic    " + basic_counter + " \n" + "standard     " + standard_counter + "\n" + "  premium     " + premium_counter);
+            } else if (Subscription.PlanACounter > Subscription.PlanCCounter && Subscription.PlanCCounter < Subscription.PlanBCounter) {
+                System.out.println("basic    " + Subscription.PlanACounter + " \n" + "standard     " + Subscription.PlanBCounter + "\n" + "  premium     " + Subscription.PlanCCounter);
             }
-        } else if (standard_counter > basic_counter) {
-            if (standard_counter > premium_counter && premium_counter > basic_counter) {
-                System.out.println("standard" + standard_counter + "\n" + "premium " + premium_counter + "\n" + " basic " + basic_counter);
-            } else if (standard_counter > premium_counter && premium_counter < basic_counter) {
-                System.out.println("standard" + standard_counter + "\n" + " basic " + basic_counter + "\n" + "premium " + premium_counter);
+        } else if (Subscription.PlanBCounter > Subscription.PlanACounter) {
+            if (Subscription.PlanBCounter > Subscription.PlanCCounter && Subscription.PlanCCounter > Subscription.PlanACounter) {
+                System.out.println("standard" + Subscription.PlanBCounter + "\n" + "premium " + Subscription.PlanCCounter + "\n" + " basic " + Subscription.PlanACounter);
+            } else if (Subscription.PlanBCounter > Subscription.PlanCCounter && Subscription.PlanCCounter < Subscription.PlanACounter) {
+                System.out.println("standard" + Subscription.PlanBCounter + "\n" + " basic " + Subscription.PlanACounter + "\n" + "premium " + Subscription.PlanCCounter);
             }
-        } else if (premium_counter > standard_counter) {
-            if (premium_counter > basic_counter && basic_counter > standard_counter) {
-                System.out.println(" premium " + premium_counter + "\n" + "basic " + basic_counter + "\n" + "standard" + standard_counter);
-            } else if (premium_counter > basic_counter && basic_counter < standard_counter) {
-                System.out.println(" premium " + premium_counter + "\n" + "standard" + standard_counter + "\n" + "basic " + basic_counter);
+        } else if (Subscription.PlanCCounter > Subscription.PlanBCounter) {
+            if (Subscription.PlanCCounter > Subscription.PlanACounter && Subscription.PlanACounter > Subscription.PlanBCounter) {
+                System.out.println(" premium " + Subscription.PlanCCounter + "\n" + "basic " + Subscription.PlanACounter + "\n" + "standard" + Subscription.PlanBCounter);
+            } else if (Subscription.PlanCCounter > Subscription.PlanACounter && Subscription.PlanACounter < Subscription.PlanBCounter) {
+                System.out.println(" premium " + Subscription.PlanCCounter + "\n" + "standard" + Subscription.PlanBCounter + "\n" + "basic " + Subscription.PlanACounter);
             }
         }
     }
 
+    private int DisplayReven() {
+        return sub.CalcRevenu();
 
+
+    }
 
 
 }

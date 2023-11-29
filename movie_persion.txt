@@ -1,6 +1,6 @@
-20, femail,egypt ,hager,hussien
-35,mail,rosia,ahmed,ali
-40, mail,america,lala,john
-57,femail,france,jak,welly
-22,femail,egypt,aya,yehia
-37,mail,koria,usif,mohamed
+20, female,egypt ,hager,hussien
+35,male,rosia,ahmed,ali
+40, male,america,lala,john
+57,female,france,jak,welly
+22,female,egypt,aya,yehia
+37,male,koria,usif,mohamed
