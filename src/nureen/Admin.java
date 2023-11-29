@@ -1,9 +1,11 @@
 package nureen;
 
 import mitsho.Basic;
+import mitsho.Genre;
 import mitsho.Movie;
 import mitsho.Subscription;
 import person_based_movies.cast;
+import person_based_movies.director;
 
 import java.util.*;
 
@@ -13,13 +15,14 @@ public class Admin extends personx {
     ArrayList<String> movies = new ArrayList<String>();
     ArrayList<Movie> moviesList = new ArrayList<Movie>();
     ArrayList<String> moviescategory = new ArrayList<String>();///arraylist of categories 3nd youstine
+    ArrayList<Movie> MoviesList = new ArrayList<>();
+    ArrayList<cast> MovieCast = new ArrayList<>();
+    ArrayList<Genre> MovieGenre = new ArrayList<>();
 
-    private void add_movie(String addmovie, String categories) {
-        ///arrayoflist of movies 3nd youstina
-        movies.add(addmovie);
-        moviescategory.add(addmovie);
-        //add director and cast
+    ArrayList<director> MovieDirector = new ArrayList<>();
 
+    private void add_movie(Movie addmovie) {
+        MoviesList.add(addmovie);
         System.out.println("movie is added successfully!!");
     }
 
@@ -37,6 +40,15 @@ public class Admin extends personx {
                 moviescategory.remove(i);
             }
         }
+    }
+    public void AddDirector(director d) {
+        MovieDirector.add(d);
+    }
+    public void AddCast(cast c) {
+        MovieCast.add(c);
+    }
+    public void AddGenre(Genre G) {
+        MovieGenre.add(G);
     }
 
     public void displayplannumbers() {
@@ -62,7 +74,7 @@ public class Admin extends personx {
         }
     }
 
-    private int DisplayReven() {
+    private int DisplayRevenu() {
         return sub.CalcRevenu();
 
 

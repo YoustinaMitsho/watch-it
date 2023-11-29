@@ -22,9 +22,10 @@ public class Movie {
     public int MovieBudget;
     public int MovieRevenue;
     public static boolean is_watched;
+    public  boolean is_favourite;
+    public boolean is_WatchLater;
     public Image MoviePoster;
-
-public String discription;
+    public String discription;
     public Movie(int movieId, String movieTitle, Date movieDate, int movieTime, String movieLanguage, int IMDB_Score, String movieCountry, int movieBudget, int movieRevenue, Image moviePoster,double UserRating,String Discription) {
         MovieId = movieId;
         MovieTitle = movieTitle;
@@ -40,15 +41,26 @@ public String discription;
         this.discription=Discription;
     }
 
+    public Movie(boolean Is_it, String which){
+        if(which.equals("fav")){
+            this.is_favourite = Is_it;
+        } else if (which.equals("watched")) {
+            this.is_watched = Is_it;
+        }
+        else if (which.equals("watchlater")){
+            this.is_WatchLater = Is_it;
+        }
+    }
+
     public String getMovieTitle() {
         return MovieTitle;
     }
 
-    public boolean isIs_watched() {
-        return is_watched;
-    }
+    //public boolean isIs_watched() {
+        //return is_watched;
+    //}
 
-    public ArrayList<Movie> MovieSearch(String MovieName) {
+    /*public ArrayList<Movie> MovieSearch(String MovieName) {
         ArrayList<Movie> result = new ArrayList<Movie>();
         for (Movie movie : MoviesList) {
             if (MovieName.equals(movie.getMovieTitle())) {
@@ -56,7 +68,7 @@ public String discription;
             }
         }
         return result;
-    }
+    }*/
 
     protected void AddGenre(String MovieName, Genre genre) {
         for (Movie movie : MoviesList) {
@@ -76,14 +88,15 @@ public String discription;
     }
 
     // show movie cast w director
-    public void AddCast(cast c) {
+    /*public void AddCast(cast c) {
         MovieCast.add(c);
-    }
+    }*/
 
-    public void AddDirector(director d) {
+    /*public void AddDirector(director d) {
         MovieDirector.add(d);
-    }
-    ArrayList<cast> SearchCastByName(String name) {
+    }*/
+
+    /*public ArrayList<cast> SearchCastByName(String name) {
         ArrayList<cast> result = new ArrayList<cast>();
         for (cast castData : MovieCast) {
             if (name.equals(castData.F_name)) {
@@ -91,8 +104,8 @@ public String discription;
             }
         }
         return result;
-    }
-    ArrayList<director> SearchDirectorByName(String name) {
+    }*/
+   /* public ArrayList<director> SearchDirectorByName(String name) {
         ArrayList<director> result = new ArrayList<director>();
         for (director DirectorData : MovieDirector) {
             if (name.equals(DirectorData.F_name)) {
@@ -101,7 +114,5 @@ public String discription;
         }
         return result;
 
-    }
-
-
+    }*/
 }
