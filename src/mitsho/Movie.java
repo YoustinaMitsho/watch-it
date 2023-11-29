@@ -3,8 +3,11 @@ package mitsho;
 import person_based_movies.*;
 
 import java.awt.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Movie {
     ArrayList<Movie> MoviesList = new ArrayList<Movie>();
@@ -114,5 +117,21 @@ public class Movie {
         }
         return result;
 
+    }*/
+
+    public ArrayList<Movie> UpCommingMovies(){
+        ArrayList<Movie> UpCommingMovie = new ArrayList<>();
+        LocalDate today = LocalDate.now();
+        LocalDate localDateFromMovieDate = this.MovieDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        if(today.isBefore(localDateFromMovieDate)){
+            UpCommingMovie.add(this);
+        }
+        return UpCommingMovie;
+    }
+
+    /*public List<Movie> TopMovies(){
+        Movie[] topmovies = TopMovies().toArray(new Movie[10]);
+        // probably will use comprator interface
+        // to be studied then implemented
     }*/
 }
