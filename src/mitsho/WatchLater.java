@@ -5,9 +5,9 @@ import java.util.Date;
 
 public class WatchLater extends Movie {
 
-    ArrayList<Movie> WatchedLater=new ArrayList<Movie>();
+   static ArrayList<Movie> WatchedLater=new ArrayList<Movie>();
 
-    public WatchLater(int movieId, String movieTitle, Date movieDate, int movieTime, String movieLanguage, int IMDB_Score, String movieCountry, int movieBudget, int movieRevenue, Image moviePoster, double UserRating, String Discription, ArrayList<Movie> watchedLater) {
+    public WatchLater(int movieId, String movieTitle, Date movieDate, int movieTime, String movieLanguage, double IMDB_Score, String movieCountry, int movieBudget, int movieRevenue, Image moviePoster, double UserRating, String Discription, ArrayList<Movie> watchedLater) {
         super(movieId, movieTitle, movieDate, movieTime, movieLanguage, IMDB_Score, movieCountry, movieBudget, movieRevenue, moviePoster, UserRating, Discription);
         WatchedLater = watchedLater;
     }
@@ -28,6 +28,11 @@ public class WatchLater extends Movie {
             if(movie.equals(MovieName)){
                 WatchedLater.remove(movie);
             }
+        }
+    }
+    public static void DisplayWatchLater(){
+        for (Movie movies:WatchedLater ){
+            System.out.println(movies.MovieTitle);
         }
     }
 }

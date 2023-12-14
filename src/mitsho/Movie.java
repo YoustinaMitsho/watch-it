@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.List;
 
 public class Movie {
-    ArrayList<Movie> MoviesList = new ArrayList<Movie>();
+   static ArrayList<Movie> MoviesList = new ArrayList<Movie>();
     public int MovieId;
     public String MovieTitle;
     public Date MovieDate;
@@ -66,7 +66,7 @@ public class Movie {
     //return is_watched;
     //}
 
-    /*public ArrayList<Movie> MovieSearch(String MovieName) {
+    public static ArrayList<Movie> MovieSearch(String MovieName) {
         ArrayList<Movie> result = new ArrayList<Movie>();
         for (Movie movie : MoviesList) {
             if (MovieName.equals(movie.getMovieTitle())) {
@@ -74,7 +74,7 @@ public class Movie {
             }
         }
         return result;
-    }*/
+    }
 
     protected void AddGenre(String MovieName, Genre genre) {
         for (Movie movie : MoviesList) {

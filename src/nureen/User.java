@@ -1,14 +1,21 @@
 package nureen;
-
 import mitsho.*;
 import person_based_movies.cast;
 import person_based_movies.director;
-
+import javax.swing.plaf.SplitPaneUI;
 import java.util.*;
 
-public class User extends personx {
-    Subscription subscriptionPlan = new Subscription();
+public class User extends personx implements ReadFiles {
     int age; //3shan offer films related
+
+    String subscrebtion_type;
+    public User(int id,String username,int password,String Fname,String Lname,String email,int age,String nationality,String subscrebtiontype){
+        super( id, username,  password,  Fname,  Lname,  email);
+        this.age=age;
+        this.nationality=nationality;
+        this.subscrebtion_type=subscrebtiontype;
+    }
+    Subscription subscriptionPlan = new Subscription();
     String nationality;//3shan offer films related
     ArrayList<Watched> alreadyWatched = new ArrayList<>();
     ArrayList<Favourite> FavouriteMovies = new ArrayList<>();
@@ -47,6 +54,14 @@ public class User extends personx {
         }
         return result;
     }
+
+    public String  display(){
+        // String = (id+","username, pass,String Fname,String Lname,String email,int age,String nationality,String subscrebtiontype
+        int iid=getId();
+        return getId()+","+getUsername()+","+getPassword()+","+firstname+","+lastname+","+getEmail()+","+age+","+nationality+","+subscrebtion_type;
+
+    }
+
 
 
 }
