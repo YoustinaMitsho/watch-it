@@ -28,4 +28,11 @@ public class Watched extends Movie{
             System.out.println(movies.MovieTitle);
         }
     }
+    protected static void RemoveMovieFromWatched(String MovieName){
+        for (Movie movie: watchedlist) {
+            if(movie.equals(MovieName)){
+                watchedlist.remove(movie);
+            }
+        }
+    }
 }

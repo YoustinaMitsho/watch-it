@@ -1,7 +1,7 @@
 package mitsho;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 
 public class WatchLater extends Movie {
 
@@ -15,7 +15,7 @@ public class WatchLater extends Movie {
     public WatchLater(boolean watchlater, String which) {
         super(watchlater, "watchlater");
     }
-    protected void Addwatchlater(){
+    protected static void Addwatchlater(){
         for (Movie WatchLaterMovie:MoviesList) {
             if(is_WatchLater){
                 WatchedLater.add(WatchLaterMovie);
@@ -23,14 +23,24 @@ public class WatchLater extends Movie {
         }
     }
 
-    protected void RemoveMovieFromWatchLater(String MovieName){
+  /*protected static void addmovielater(int n)
+  {
+      for (Movie movie: MoviesList) {
+          if(movie.MovieId==(n)){
+              WatchedLater.add(movie.MovieTitle);
+          }
+      }
+
+  }*/
+
+    public static void RemoveMovieFromWatchLater(String MovieName){
         for (Movie movie: WatchedLater) {
             if(movie.equals(MovieName)){
                 WatchedLater.remove(movie);
             }
         }
     }
-    public static void DisplayWatchLater(){
+    protected static void DisplayWatchLater(){
         for (Movie movies:WatchedLater ){
             System.out.println(movies.MovieTitle);
         }

@@ -5,15 +5,21 @@ import person_based_movies.director;
 import javax.swing.plaf.SplitPaneUI;
 import java.util.*;
 
-public class User extends personx implements ReadFiles {
+public class User extends personx  {
     int age; //3shan offer films related
 
-    String subscrebtion_type;
-    public User(int id,String username,int password,String Fname,String Lname,String email,int age,String nationality,String subscrebtiontype){
+    String subscription;
+    public User(int id,String username,int password,String Fname,String Lname,String email,int age,String nationality,String subscription){
         super( id, username,  password,  Fname,  Lname,  email);
         this.age=age;
         this.nationality=nationality;
-        this.subscrebtion_type=subscrebtiontype;
+        this.subscription=subscription;
+    }
+    public User(String username,int password,String Fname,String Lname,String email,int age,String nationality,String subscription){
+        super(  username,  password,  Fname,  Lname,  email);
+        this.age=age;
+        this.nationality=nationality;
+        this.subscription=subscription;
     }
     Subscription subscriptionPlan = new Subscription();
     String nationality;//3shan offer films related
@@ -24,6 +30,8 @@ public class User extends personx implements ReadFiles {
     ArrayList<cast> MovieCast = new ArrayList<>();
 
     ArrayList<director> MovieDirector = new ArrayList<>();
+
+
 
     public ArrayList<Movie> MovieSearch(String MovieName) {
         ArrayList<Movie> result = new ArrayList<Movie>();
@@ -58,7 +66,7 @@ public class User extends personx implements ReadFiles {
     public String  display(){
         // String = (id+","username, pass,String Fname,String Lname,String email,int age,String nationality,String subscrebtiontype
         int iid=getId();
-        return getId()+","+getUsername()+","+getPassword()+","+firstname+","+lastname+","+getEmail()+","+age+","+nationality+","+subscrebtion_type;
+        return getId()+","+getUsername()+","+getPassword()+","+firstname+","+lastname+","+getEmail()+","+age+","+nationality+","+subscription;
 
     }
 

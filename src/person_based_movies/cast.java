@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class cast extends movie_person {
 
-    ArrayList<cast> cast_list = new ArrayList<cast>();
+   public static ArrayList<cast> cast_list = new ArrayList<cast>();
 
     {
         String path = "movie_persion.txt";

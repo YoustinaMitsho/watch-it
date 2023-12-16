@@ -16,7 +16,7 @@ public class Favourite extends Movie {
     public Favourite(boolean fav, String which){
         super(fav, "fav");
     }
-    protected void AddFavouritemovie(){
+    protected static void AddFavouritemovie(){
         for (Movie FavouriteMovie: MoviesList) {
             if(is_favourite){
                 FavouriteList.add(FavouriteMovie);
@@ -24,7 +24,7 @@ public class Favourite extends Movie {
         }
     }
 
-    protected void RemoveMovieFromFavourite(String MovieName){
+    protected static void RemoveMovieFromFavourite(String MovieName){
         for (Movie movie: FavouriteList) {
             if(movie.equals(MovieName)){
                 FavouriteList.remove(movie);

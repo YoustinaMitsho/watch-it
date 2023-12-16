@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class director extends movie_person {
 
-    ArrayList<director> director_list = new ArrayList<director>();
+  public static   ArrayList<director> director_list = new ArrayList<director>();
 
     {
         String path = "movie_persion.txt";

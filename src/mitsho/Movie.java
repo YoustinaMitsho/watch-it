@@ -24,8 +24,8 @@ public class Movie {
     public int MovieBudget;
     public int MovieRevenue;
     public static boolean is_watched;
-    public  boolean is_favourite;
-    public boolean is_WatchLater;
+    public static boolean is_favourite;
+    public static boolean is_WatchLater;
     public Image MoviePoster;
     public String discription;
     public Movie(int movieId, String movieTitle, Date movieDate, int movieTime, String movieLanguage, Double IMDB_Score, String movieCountry, int movieBudget, int movieRevenue, Image moviePoster,double UserRating,String Discription) {
@@ -66,16 +66,55 @@ public class Movie {
     //return is_watched;
     //}
 
-    public static ArrayList<Movie> MovieSearch(String MovieName) {
-        ArrayList<Movie> result = new ArrayList<Movie>();
+    public static void MovieSearch(String MovieName) {
+
         for (Movie movie : MoviesList) {
             if (MovieName.equals(movie.getMovieTitle())) {
-                result.add(movie);
+                System.out.println(movie.discription);
+            }
+            else{
+                System.out.println(" sorry this movie is not found");
             }
         }
-        return result;
     }
+   public static void MovieSearch_bydirector(String directorFname,String directorLname) {
+       for (director director : director.director_list) {
+           if (directorFname.equals(director.F_name) && directorLname.equals(director.L_name)) {
+               System.out.println( "his firstname:"+director.F_name );
+               System.out.println("his lastname:" + director.L_name);
+               System.out.println( " his nationality:"+director.Nationality);
+               System.out.println( "his director Age"+director.Age);
+               for (Movie movie : MoviesList) {
+                   if ((directorFname+" "+directorLname).equals(movie.MovieDirector)) {
+                       System.out.println(movie.getMovieTitle());
 
+                   } else {
+                       System.out.println(" this director has no movies");
+                   }
+               }
+           }
+       }
+   }
+
+
+    public static void MovieSearch_byActor(String ActorFname,String ActorLname) {
+        for (cast cast : cast.cast_list) {
+            if (ActorFname.equals(cast.F_name) && ActorLname.equals(cast.L_name)) {
+                System.out.println( "his firstname:"+cast.F_name );
+                System.out.println("his lastname:" + cast.L_name);
+                System.out.println( " his nationality:"+cast.Nationality);
+                System.out.println( "his director Age"+cast.Age);
+                for (Movie movie : MoviesList) {
+                    if ((ActorFname+" "+ActorLname).equals(movie.MovieDirector)) {
+                        System.out.println(movie.getMovieTitle());
+
+                    } else {
+                        System.out.println("  no movies");
+                    }
+                }
+            }
+        }
+    }
     protected void AddGenre(String MovieName, Genre genre) {
         for (Movie movie : MoviesList) {
             if (MovieName.equals(movie.getMovieTitle())) {
@@ -84,7 +123,7 @@ public class Movie {
         }
     }
 
-    public ArrayList<Genre> ShowMovieGenre(String MovieName) {
+    public static  ArrayList<Genre> ShowMovieGenre(String MovieName) {
         for (Movie movie : MoviesList) {
             if (MovieName.equals(movie.getMovieTitle())) {
                 return movie.MovieGenre;
@@ -132,9 +171,17 @@ public class Movie {
         return UpCommingMovie;
     }
 
-    public List<Movie> TopMovies(){
+    public static List<Movie> TopMovies(){
         Collections.sort(MoviesList, Comparator.comparingDouble(Movie::getIMDB_Score).reversed());
         List<Movie> top10Movies = MoviesList.subList(0, Math.min(MoviesList.size(), 10));
         return top10Movies;
     }
+    public static void DisplayAllMovies() {
+
+        for (Movie movie : MoviesList) {
+            System.out.println(movie.MovieTitle);
+        }
+
+    }
+
 }

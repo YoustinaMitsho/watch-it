@@ -10,7 +10,7 @@ import person_based_movies.director;
 import java.util.*;
 public class admin extends personx {
 
-    admin( java.lang.String username, String password, java.lang.String firstname, java.lang.String lastname, java.lang.String email) {
+    admin( java.lang.String username, int password, java.lang.String firstname, java.lang.String lastname, java.lang.String email) {
         super( username, password, firstname, lastname, email);
     }
 
