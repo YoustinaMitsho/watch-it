@@ -7,6 +7,11 @@ import java.io.IOException;
 import java.security.spec.RSAOtherPrimeInfo;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import static nureen.Admin.displayplannumbers;
+import static nureen.Admin.getInstance;
+import static nureen.User.calculateMostRevenueMonth;
+
 public class Main {
     public static void main(String args[]) throws IOException {
         ArrayList<User> user = User.Read("oop_prpject_user_data.txt");
@@ -14,12 +19,12 @@ public class Main {
         ArrayList<director> Director = director.Read("movie_persion_di.txt");
         ArrayList<cast> Cast = cast.Read("movie_persion_ca.txt");
         Admin admin = Admin.getInstance();
-        welcome(user, movie);
+        welcome(user, movie,admin);
         //DisplayUserDiscoverPg(user , movie);
         //UserProfile();
     }
 
-    public static void  register(ArrayList<User> user, ArrayList<Movie> movies) {
+    public static void  register(ArrayList<User> user, ArrayList<Movie> movies,Admin admin) {
         Scanner inputuser = new Scanner(System.in);
         String email;
         while (true) {
@@ -105,40 +110,87 @@ public class Main {
 
             }
         }
+        int month;
+        while (true){
+            System.out.println("enter your current month");
+            month=inputuser.nextInt();
+            if (month > 0 && month < 13) {
+                System.out.println(" month added");
+                break;
+            } else {
+                System.out.println("invalid choice");
+
+            }
+        }
         User u = (User) user.get(user.size() - 1);
         int idnew = u.id + 1;
 
-        user.add(new User(idnew, username, password, firstname, lastname, email, age, nationality, subscription.toLowerCase()));
-        login(user, movies);
+        user.add(new User(idnew, username, password, firstname, lastname, email, age, nationality, subscription.toLowerCase(),month));
+        login_user(user, movies,admin);
     }
-    public static void menu (ArrayList<User> user, ArrayList<Movie> movies)
-    {
-        Scanner inputuser= new Scanner(System.in);
+
+    public static void menu (ArrayList<User> user, ArrayList<Movie> movies,Admin admin) {
+        Scanner inputuser = new Scanner(System.in);
+        int choice2_enterapp;
         int choice_enterapp;
         //boolen flag=true;
-        while(true){
-            System.out.println("enter 1 for registration \n"+ "enter 2 for login" );
-            choice_enterapp=inputuser.nextInt();
-            if (choice_enterapp == 1)
-            {
+        while (true) {
+            System.out.println("enter 1 for registration \n" + "enter 2 for login");
+            choice_enterapp = inputuser.nextInt();
+            if (choice_enterapp == 1) {
                 System.out.println("WELCOME TO WATCHIT");
-                register(user, movies);
+                register(user, movies, admin);
                 break;
-            } else if (choice_enterapp ==2) {
-                System.out.println("WELCOME TO WATCHIT");
-                login (user, movies);
-                break;
-            }
-            else {
-                System.out.println("INVALID CHOICE ");
+            } else if (choice_enterapp == 2) {
+                System.out.println("enter 1  login AS ADMIN \n" + "enter 2 login AS USER \n" + "enter 3 to BACK \n");
+                choice2_enterapp = inputuser.nextInt();
+                if (choice2_enterapp == 1) {
+                    System.out.println("WELCOME ADMIN  TO WATCHIT");
+                    login_admin(user, movies, admin);
+                }
+                if (choice2_enterapp == 2) {
+                    System.out.println("WELCOME USER TO WATCHIT");
+                    System.out.println("WELCOME USER  TO WATCHIT");
+                    login_user(user, movies, admin);
+                    break;
+                } else {
+                    System.out.println("INVALID CHOICE ");
 
+                }
             }
         }
     }
 
-    public static  void login (ArrayList<User> user, ArrayList<Movie> movies) {
+        public static  void login_admin (ArrayList<User> user, ArrayList<Movie> movies,Admin admin) {
+            System.out.println("-----------");
+            Scanner inputadmin= new Scanner(System.in);
+            System.out.println("enter your email ");
+            String entered_email =inputadmin.next();
+            int entered_pass;
+            if(entered_email.equals(admin.getEmail()))
+            {
+                do{
+                    System.out.println("enter password");
+                    entered_pass= inputadmin.nextInt();
+                    if(entered_pass==admin.getPassword())
+                    {
+                        AdminProfile( user, movies, admin);
+                        break;
+                    }
+                    else {
+                        System.out.println("incorrect password!!");
+                    }
+                }while(entered_pass==admin.getPassword());
+            }
+            else {
+                System.out.println("INVALID");
+            }
+        }
+
+
+    public static  void login_user (ArrayList<User> user, ArrayList<Movie> movies,Admin admin) {
         System.out.println("-----------");
-        System.out.println("Welcome to Login:");
+        System.out.println("Welcome  user to Login:");
         Scanner inputuser= new Scanner(System.in);
         boolean pass=false;
         boolean flag_of_enter=false;
@@ -168,15 +220,15 @@ public class Main {
         }while (flag_of_enter && !pass);
         if(!flag_of_enter){
             System.out.println("invalid email enter again ");
-            menu(user, movies);
+            menu(user, movies,admin);
         }
         if(pass){
-            DisplayUserDiscoverPg(userLogIn, movies, user);
+            DisplayUserDiscoverPg(userLogIn, movies, user,getInstance());
         }
     }
 
     // welcome msg:
-    static void welcome(ArrayList<User> user, ArrayList<Movie> movies){
+    static void welcome(ArrayList<User> user, ArrayList<Movie> movies,Admin admin){
         System.out.println("Welcome to Watch It, where your movie experience is personalized just for you!\n" +
                 "Create your Watchlist to never miss a movie you want to see and easily access\n" +
                 "your Favorites for instant enjoyment. Our intelligent Recommendations engine\n" +
@@ -186,7 +238,7 @@ public class Main {
                 " Watch It – where every movie is a curated experience designed for your\n" +
                 "entertainment pleasure!");
         System.out.println("----------------------------------------------------------------------------------------");
-        menu (user, movies);
+        menu (user, movies,admin);
            /* int btn;
             System.out.println("1. Log In");
             System.out.println("2. Register");
@@ -209,7 +261,7 @@ public class Main {
             }while(flag == false);*/
     }
     //Discover page:
-    static void DisplayUserDiscoverPg(User user, ArrayList<Movie> movies, ArrayList<User> users){
+    static void DisplayUserDiscoverPg(User user, ArrayList<Movie> movies, ArrayList<User> users,Admin admin){
         System.out.println("--------------------------------------------------------------------------");
         System.out.println("Discover Page:");
         System.out.println("1. User Profile");
@@ -221,25 +273,26 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         input = scan.nextInt();
         if(input == 1){
-            UserProfile(movies, user, users);
+            UserProfile(movies, user, users,admin);
         } else if (input == 2) {
-            Search(movies, user, users);
+            Search(movies, user, users,admin);
         } else if (input == 3) {
-            displayMovies(user, movies, users);}
+            displayMovies(user, movies, users,admin);}
 //
         else if(input==4)
         {
-            menu(users, movies);
+            menu(users, movies,admin);
         }
+
         else{
             System.out.println("invalid choice!" );
-            DisplayUserDiscoverPg(user, movies, users);
+            DisplayUserDiscoverPg(user, movies, users,admin);
         }
 
     }
 
     //User profile:
-    static void UserProfile(ArrayList<Movie> movies, User user, ArrayList<User>users){
+    static void UserProfile(ArrayList<Movie> movies, User user, ArrayList<User>users,Admin admin){
         System.out.println("--------------------------------------------------------------------------");
         System.out.println("User profile:");
         System.out.println("1.delete\n2.Add\n3.Show\n4.Back");
@@ -266,7 +319,7 @@ public class Main {
                 String movie=scan.next();
                 Favourite.RemoveMovieFromFavourite(movie );
             }else if (DeleteInput==4){
-                UserProfile(movies, user, users);
+                UserProfile(movies, user, users,admin);
             }
         } else if (btn == 2) {
             System.out.println("call add");
@@ -298,7 +351,7 @@ public class Main {
                 }
                 Favourite.AddFavouritemovie();
             } else if (AddInput==3){
-                UserProfile(movies, user, users);
+                UserProfile(movies, user, users,admin);
             }
         } else if (btn == 3) {
             System.out.println("show:");
@@ -316,20 +369,20 @@ public class Main {
                 Watched.DisplayWatched();
             }else if (input==4){
                 System.out.println("back");
-                UserProfile(movies, user, users);
+                UserProfile(movies, user, users,admin);
             }
 
         }
         else if (btn == 4) {
-            DisplayUserDiscoverPg(user, movies, users);
+            DisplayUserDiscoverPg(user, movies, users,admin);
         } else {
             System.out.println("Invalid Input, Try again!");
-            UserProfile(movies, user, users);
+            UserProfile(movies, user, users,admin);
         }
     }
 
     // Search:
-    static void Search(ArrayList<Movie> movies, User user, ArrayList<User> users) {
+    static void Search(ArrayList<Movie> movies, User user, ArrayList<User> users,Admin admin) {
         System.out.println("--------------------------------------------------------------------------");
         System.out.println("Search Page:");
         System.out.println("Search by:");
@@ -337,7 +390,7 @@ public class Main {
         int btn; Scanner scan = new Scanner(System.in); btn = scan.nextInt();
         if(btn == 1){
             MovieSearch(); // not working
-            Search(movies, user, users);
+            Search(movies, user, users,admin);
         } else if (btn == 2) {
             System.out.println("call search actor");
             System.out.println("enter the first  name of actor you search for:");
@@ -345,7 +398,7 @@ public class Main {
             System.out.println("enter the second name of actor you search for:");
             String ActorLname= scan.next();
             Movie.MovieSearch_byActor( ActorFname, ActorLname); // not working
-            Search(movies, user, users);
+            Search(movies, user, users,admin);
         } else if (btn == 3) {
             System.out.println("call search Director");
             System.out.println("enter the first  name of director you search for:");
@@ -353,21 +406,21 @@ public class Main {
             System.out.println("enter the second name of director you search for:");
             String directorlname= scan.next();
             Movie.MovieSearch_bydirector(directorfname,directorlname);
-            Search(movies, user, users);
+            Search(movies, user, users,admin);
         } else if (btn == 4) {
             System.out.println("enter genre:");
             String genre = scan.next();
             Movie.ShowMovieGenre(genre);
-            Search(movies, user, users);
+            Search(movies, user, users,admin);
         } else if (btn == 5) {
-            DisplayUserDiscoverPg(user, movies, users);
+            DisplayUserDiscoverPg(user, movies, users,admin);
         } else {
             System.out.println("Invalid Input, Try again!");
-            Search(movies, user, users);
+            Search(movies, user, users,admin);
         }
     }
 
-    static void ShowMovie(Movie movie, User user, ArrayList<Movie> movies, ArrayList<User> users){
+    static void ShowMovie(Movie movie, User user, ArrayList<Movie> movies, ArrayList<User> users,Admin admin){
         System.out.println("--------------------------------------------------------------------------");
         //call function read in movie
         System.out.println("1. Watch\n2. Rate\n3. Add to favourite\n4. Add to watch later\n5. show movie genere\n6. Back");
@@ -385,10 +438,10 @@ public class Main {
             System.out.println("call show movie genere");
 
         } else if (input == 6) {
-            DisplayUserDiscoverPg(user, movies, users);
+            DisplayUserDiscoverPg(user, movies, users,admin);
         } else {
             System.out.println("Invalid Input, Try again!");
-            ShowMovie(movie, user, movies, users);
+            ShowMovie(movie, user, movies, users,admin);
         }
     }
 
@@ -398,7 +451,7 @@ public class Main {
         name = scan.nextLine();
         Movie.MovieSearch(name);
     }
-    static void displayMovies(User user, ArrayList<Movie> movies, ArrayList<User> users){
+    static void displayMovies(User user, ArrayList<Movie> movies, ArrayList<User> users,Admin admin){
         Scanner sc= new Scanner(System.in);
         System.out.println("1.ALL MOVIES");
         System.out.println("2.TOP RATED MOVIES");
@@ -407,18 +460,90 @@ public class Main {
         int choose= sc.nextInt();
         if (choose==1){
             Movie.DisplayAllMovies();
-            displayMovies(user, movies, users);
+            displayMovies(user, movies, users,admin);
         }
         else if(choose==2){
             Movie.TopMovies(); // not working
-            displayMovies(user, movies, users);
+            displayMovies(user, movies, users,admin);
         }
         else if(choose==3) {
             Movie.UpCommingMovies(); // not working
-            displayMovies(user, movies, users);
+            displayMovies(user, movies, users,admin);
 
         }
         else if(choose==4){
-            DisplayUserDiscoverPg(user, movies, users);
+            DisplayUserDiscoverPg(user, movies, users,admin);
         }
-    }}
+    }
+
+     static void AdminProfile(ArrayList<User> user,ArrayList<Movie> movies,Admin admin) {
+         Scanner inputAdmin = new Scanner(System.in);
+         System.out.println("1-edit move info \n2-display the most subscribed plan\n3-display users data\n4-display month had the most revenue\n5-back");
+         int admin_choice = inputAdmin.nextInt();
+         if(  admin_choice == 1){
+             EditedMovie( user, movies, admin);
+         }
+         else if ( admin_choice == 2) {
+             displayplannumbers();
+           //  most plan
+         }
+         else if ( admin_choice == 3) {
+           //  displayMovies(user, movies, users,admin);
+              }
+         else if( admin_choice ==4)
+         {
+             calculateMostRevenueMonth(user);
+
+         }
+             else if( admin_choice ==5){
+             menu(user,movies,admin);
+             }
+
+
+         else{
+             System.out.println("invalid choice!" );
+
+         }
+         AdminProfile( user, movies, admin);
+
+     }
+
+
+
+    static void EditedMovie(ArrayList<User> user,ArrayList<Movie> movies,Admin admin){
+        Scanner inputAdmin = new Scanner(System.in);
+       //  DisplayMovieSToAdmin();
+                System.out.println("---------------------------------------------------------------------------------------------------------" +
+                         "\n1-add movie\n2-delete movie\n3-add genera\n4-edit cast\n5-add director\n6-back");
+                 int AdminChoice2ToMovies = inputAdmin.nextInt();
+        if(  AdminChoice2ToMovies == 1){
+            //add_movie(Movie addmovie);
+        }
+        else if (  AdminChoice2ToMovies == 2) {
+            displayplannumbers();
+            //  remove_movie(String removedmovie, String category)
+        }
+        else if (  AdminChoice2ToMovies == 3) {
+            //  displayMovies(user, movies, users,admin);
+        }
+        else if(  AdminChoice2ToMovies ==4)
+        {
+            //edit cast if you want
+
+        }
+        else if(  AdminChoice2ToMovies ==5){
+           // add director if you want
+        }
+        else if(  AdminChoice2ToMovies ==6){
+            AdminProfile( user, movies, admin);
+        }
+
+
+        else{
+            System.out.println("invalid choice!" );
+
+        }
+        EditedMovie( user, movies, admin);
+    }
+
+}

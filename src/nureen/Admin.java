@@ -43,8 +43,10 @@ public class Admin extends personx {
         System.out.println("movie is added successfully!!");
     }
 
+
+
     private void remove_movie(String removedmovie, String category) {
-        ArrayList<String> movies = new ArrayList<String>();///arrayoflist of movies 3nd youstina
+        ArrayList<String> movies = new ArrayList<String>();///array of list of movies 3nd youstina
         for (int i = 0; i < movies.size(); i++) {
             if (movies.get(i).equals(removedmovie)) {
                 movies.remove(i);
@@ -68,7 +70,7 @@ public class Admin extends personx {
         MovieGenre.add(G);
     }
 
-    public void displayplannumbers() {
+    public static void displayplannumbers() {
         if (Subscription.PlanACounter > Subscription.PlanBCounter) {
             if (Subscription.PlanACounter > Subscription.PlanCCounter && Subscription.PlanCCounter > Subscription.PlanBCounter) {
                 System.out.println("basic    " + Subscription.PlanACounter + " \n" + "  premium     " + Subscription.PlanCCounter + "/n" + "standard     " + Subscription.PlanBCounter);
