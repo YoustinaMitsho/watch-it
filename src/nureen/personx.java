@@ -22,11 +22,11 @@ public class personx {
         return username;
     }
 
-    public int getPassword() {
+    public  int  getPassword() {
         return password;
     }
 
-    public String getEmail() {
+    public  String getEmail() {
         return email;
     }
 }

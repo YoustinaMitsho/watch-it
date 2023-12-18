@@ -62,7 +62,7 @@ public class Subscription {
 
     //most subscriped plan done
 
-    public int CalcRevenu() {
+    public static int CalcRevenu() {
         Subscription s = new Basic();
         Basic a = (Basic) s;
 
@@ -70,9 +70,33 @@ public class Subscription {
         Standard w = (Standard) hh;
 
         Subscription gg = new Premium();
-        Premium l = (Premium) s;
+        Premium l = (Premium) gg;
 
         int res = a.CalculatePriceOf1() + w.CalculatePriceOf2() + l.CalculatePriceOf3();
         return res;
     }
+
+
+    public static int ReturnRevenu(String subscrebtion_type ) {
+
+        int  res=0;
+        if (subscrebtion_type.equals("Basic")) {
+            Basic a = new Basic();
+           res= a.Price;
+
+
+        } else if (subscrebtion_type.equals("Standard")) {
+            Standard s = new Standard();
+            res= s.Price;
+
+        } else if (subscrebtion_type.equals("Premium")) {
+
+            Premium p = new Premium();
+            res= p.Price;
+        }
+
+
+        return res;
+    }
+
 }

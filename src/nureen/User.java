@@ -13,17 +13,21 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class User extends personx implements ReadFiles {
-    int age; //3shan offer films related
+    int age;//3shan offer films related
+    int month;
 
    String subscrebtion_type;
 
-    public User(int id, String username, int pass, String Fname, String Lname, String email, int age, String nationality, String subscrebtiontype){
+    public User(int id, String username, int pass, String Fname, String Lname, String email, int age, String nationality, String subscrebtiontype, int month ){
         super( id, username,  pass,  Fname,  Lname,  email);
         this.age=age;
         this.nationality=nationality;
         this.subscrebtion_type=subscrebtiontype;
+        this.month= month;
     }
     Subscription subscriptionPlan = new Subscription();
     String nationality;//3shan offer films related
@@ -53,7 +57,7 @@ public class User extends personx implements ReadFiles {
                 // Process each valuezz
                 //System.out.println(value + " ");
 
-                Userslist.add(new User(Integer.parseInt(values[0]), values[1], Integer.parseInt(values[2]), values[3], values[4], values[5], Integer.parseInt(values[6]), values[7], values[8]));
+                Userslist.add(new User(Integer.parseInt(values[0]), values[1], Integer.parseInt(values[2]), values[3], values[4], values[5], Integer.parseInt(values[6]), values[7], values[8],Integer.parseInt(values[9])));
                 //return obj;
             }
         } catch (IOException e) {
@@ -135,6 +139,30 @@ public class User extends personx implements ReadFiles {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    public static void calculateMostRevenueMonth(ArrayList<User> Userslist) {
+
+        int maxmonth=0;
+        int max =0;
+
+        for ( int i = 1; i < 13; i++) {
+            int res=0;
+            for (User user : Userslist) {
+                if (user.month == i) {
+                     res += Subscription.ReturnRevenu(user.subscrebtion_type);
+
+                }
+
+            }
+            if(res>max){
+                max=res;
+                maxmonth=i;
+            }
+        }
+        System.out.println("Most Revenue Month is\n" + maxmonth);
+
     }
 
 }
